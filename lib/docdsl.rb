@@ -53,6 +53,10 @@ module Sinatra
         @the_url_prefix=prefix
       end
 
+      def css_style(style)
+        @styles="<link rel='stylesheet' href='#{style}'>"
+      end
+
       def json
         entries=[]
         @entries.each do |entry|
@@ -91,6 +95,7 @@ module Sinatra
       dt{ background:#f5f5f5; font-weight:bold; float:left; margin-right:1em; }
       dd{ margin-left:1em; }
     </style>
+    #{@styles}
   </head>
   <body>
     <div id="container">
