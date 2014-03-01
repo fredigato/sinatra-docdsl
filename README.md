@@ -45,6 +45,8 @@ class DocumentedApp < Sinatra::Base
     # Causes the paths in the documentation to be prefixed with 
     # this. Defaults to empty
     url_prefix "/my/application/path"
+    css_styles "/path/to/your/style.css"
+    css_styles "/other/css/style.css"
     footer "
 # Footer section
 As of 0.7.0, Sinatra docdsl supports markdown. For example, this entire 

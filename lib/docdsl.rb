@@ -12,6 +12,7 @@ module Sinatra
         @the_url_prefix=""
         @the_introduction="API Documentation for this resource"
         @the_footer='Powered by <strong><a href="https://github.com/jillesvangurp/sinatra-docdsl">Sinatra DocDSL</a></strong>'
+        @styles = Array.new
         configure_renderer do
           # default
           self.render_md
@@ -54,7 +55,7 @@ module Sinatra
       end
 
       def css_style(style)
-        @styles="<link rel='stylesheet' href='#{style}'>"
+        @styles.push("<link rel='stylesheet' href='#{style}'>")
       end
 
       def json
@@ -95,7 +96,7 @@ module Sinatra
       dt{ background:#f5f5f5; font-weight:bold; float:left; margin-right:1em; }
       dd{ margin-left:1em; }
     </style>
-    #{@styles}
+    #{@styles.join("\n")}
   </head>
   <body>
     <div id="container">
@@ -203,6 +204,7 @@ HTML
                   dt{ background:#f5f5f5; font-weight:bold; float:left; margin-right:1em; }
                   dd{ margin-left:1em; }
                 </style>
+                #{@styles.join("\n")}
               </head>
               <body>
                 <div id="container">
@@ -277,7 +279,7 @@ HTML
           end
           response ||=''
 
-          markup << "<h2>%s</h2>\n<p>%s</p>\n%s%s%s%s%s" % [path, entry.desc, params, query_params, headers,payload,response]
+          markup << "<div class='api_resource'><h2>%s</h2>\n<p>%s</p>\n%s%s%s%s%s</div>" % [path, entry.desc, params, query_params, headers,payload,response]
         } << ""
       end
     end
